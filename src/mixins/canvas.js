@@ -40,26 +40,30 @@ export default {
         create_canvas(h, id, props) {
             this._id = id
             this._attrs = props.attrs
-            return h('div', {
+            return h(
+              'div',
+              {
                 class: `trading-vue-${id}`,
                 style: {
-                    left: props.position.x + 'px',
-                    top: props.position.y + 'px',
-                    position: 'absolute',
+                  left: props.position.x + 'px',
+                  top: props.position.y + 'px',
+                  position: 'absolute',
                 },
                 ...props.on,
-            }, [
+              },
+              [
                 h('canvas', {
-                    id: `${this.$props.tv_id}-${id}-canvas`,
-                    ref: 'canvas',
-                    style: props.style,
-                    ...props.attrs,
-                    onMousemove: e => this.renderer.mousemove(e),
-                    onMouseout: e => this.renderer.mouseout(e),
-                    onMouseup: e => this.renderer.mouseup(e),
-                    onMousedown: e => this.renderer.mousedown(e),
+                  id: `${this.$props.tv_id}-${id}-canvas`,
+                  ref: 'canvas',
+                  style: props.style,
+                  ...props.attrs,
+                  onMousemove: e => this.renderer.mousemove(e),
+                  onMouseout: e => this.renderer.mouseout(e),
+                  onMouseup: e => this.renderer.mouseup(e),
+                  onMousedown: e => this.renderer.mousedown(e),
                 })
-            ].concat(props.hs || []))
+              ].concat(props.hs || []),
+            );
         },
         redraw() {
             if (!this.renderer) return

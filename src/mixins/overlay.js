@@ -24,16 +24,7 @@ export default {
 
         this.meta_info()
 
-        // TODO(1): quick fix for vue2, in vue3 we use 3rd party emit
-        try {
-            new Function('return ' + this.$emit)()
-            this._$emit = this.$emit
-            this.$emit = this.custom_event
-        } catch (e) {
-            return
-        }
-
-        this._$emit('new-grid-layer', {
+        this.$emit('new-grid-layer', {
             name: this.$options.name,
             id: this.$props.id,
             renderer: this,
@@ -44,7 +35,7 @@ export default {
         })
 
         // Overlay meta-props (adjusting behaviour)
-        this._$emit('layer-meta-props', {
+        this.$emit('layer-meta-props', {
             grid_id: this.$props.grid_id,
             layer_id: this.$props.id,
             legend: this.legend,
@@ -58,7 +49,7 @@ export default {
     },
     beforeDestroy() {
         if (this.destroy) this.destroy()
-        this._$emit('delete-grid-layer', this.$props.id)
+        this.$emit('delete-grid-layer', this.$props.id)
     },
     methods: {
         use_for() {
@@ -103,12 +94,12 @@ export default {
             // TODO(2): this prevents call overflow, but
             // the root of evil is in (1)
             if (event === 'custom-event') return
-            this._$emit('custom-event', { event, args })
+            this.$emit('custom-event', { event, args })
         },
         // TODO: the event is not firing when the same
         // overlay type is added to the offchart[]
         exec_script() {
-            if (this.calc) this.$emit('exec-script', {
+            if (this.calc) this.custom_event('exec-script', {
                 grid_id: this.$props.grid_id,
                 layer_id: this.$props.id,
                 src: this.calc(),
@@ -120,13 +111,13 @@ export default {
         settings: {
             handler: function (n, p) {
                 if (this.watch_uuid) this.watch_uuid(n, p)
-                this._$emit('show-grid-layer', {
+                this.$emit('show-grid-layer', {
                     id: this.$props.id,
                     display: 'display' in this.$props.settings ?
                         this.$props.settings['display'] : true,
                 })
             },
-            deep: true
+            deep: true,
         }
     },
     data() { return { uxs_count: 0, last_ux_id: null } },

@@ -23,7 +23,6 @@ export default {
   props: ["width", "height", "map", "tv", "dc"],
   methods: {
     initw(id) {
-      console.log('>>>>>>>>>>> I added name here', this.$props.map[id].cls);
       return this.$props.map[id].cls.name;
     },
   },
