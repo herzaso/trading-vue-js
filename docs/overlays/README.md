@@ -18,7 +18,7 @@ Available in any overlay:
 
 | Type name | Aliases | Description |
 |---|---|---|
-| Candles  | - | Candlestick chart, colud be used as main chart or overlay |
+| Candles  | - | Candlestick chart, could be used as main chart or overlay |
 
 ### Data format
 

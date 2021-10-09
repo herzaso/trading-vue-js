@@ -1,9 +1,9 @@
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WWPlugin = require('./ww_plugin.js')
 const webpack = require('webpack')
 
-global.port = '8080'
+global.port = '8081'
 
 module.exports = {
     entry: './test/index.js',
@@ -38,11 +38,14 @@ module.exports = {
         }),
         new WWPlugin(),
         new webpack.DefinePlugin({
+            __VUE_OPTIONS_API__: true,
+            __VUE_PROD_DEVTOOLS__: false,
             MOB_DEBUG: JSON.stringify(process.env.MOB_DEBUG)
         })
     ],
     devServer: {
         host: '0.0.0.0',
+        port: 8081,
         proxy: {
             '/api/v1/**': {
                 target: 'https://api.binance.com',

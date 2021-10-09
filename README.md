@@ -62,10 +62,10 @@ Minimal working example:
 
 ```html
 <template>
-<trading-vue :data="this.$data"></trading-vue>
+  <trading-vue :data="$data"></trading-vue>
 </template>
-<script>
 
+<script>
 import TradingVue from 'trading-vue-js'
 
 export default {

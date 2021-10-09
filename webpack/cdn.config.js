@@ -1,11 +1,11 @@
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const WWPlugin = require('./ww_plugin.js')
 const webpack = require('webpack')
 const fs = require('fs')
 
-global.port = '8080'
+global.port = '8081'
 
 module.exports = [{
     entry: {

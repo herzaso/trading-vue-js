@@ -2,7 +2,6 @@
 // Main DataHelper class. A container for data,
 // which works as a proxy and CRUD interface
 
-import Utils from '../stuff/utils.js'
 import DCCore from './dc_core.js'
 import SettProxy from './sett_proxy.js'
 import AggTool from './agg_tool.js'
@@ -70,7 +69,7 @@ export default class DataCube extends DCCore {
                 obj.p.indexOf(obj.v)
 
             if (i !== -1) {
-                this.tv.$set(obj.p, i, data)
+                obj.p[i] = data;
             }
         }
 

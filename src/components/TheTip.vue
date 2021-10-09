@@ -1,49 +1,53 @@
 <template>
-    <div class="tvjs-the-tip"
-        v-html="data.text" @mousedown="$emit('remove-me')"
-        :style="style">
-    </div>
+  <div
+    class="tvjs-the-tip"
+    :style="style"
+    @mousedown="$emit('remove-me')"
+    v-html="data.text"
+  />
 </template>
+
 <script>
 export default {
-    name: 'TheTip',
-    props: ['data'],
-    mounted() {
-        setTimeout(() => this.$emit('remove-me'), 3000)
+  name: "TheTip",
+  props: ["data"],
+  computed: {
+    style() {
+      return {
+        background: this.data.color,
+      };
     },
-    computed: {
-        style() {
-            return {
-                background: this.data.color
-            }
-        }
-    },
-}
+  },
+  mounted() {
+    setTimeout(() => this.$emit("remove-me"), 3000);
+  },
+};
 </script>
+
 <style>
 .tvjs-drift-enter-active {
-    transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 .tvjs-drift-leave-active {
-    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 }
-.tvjs-drift-enter, .tvjs-drift-leave-to
-{
-    transform: translateX(10px);
-    opacity: 0;
+.tvjs-drift-enter,
+.tvjs-drift-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
 }
 .tvjs-the-tip {
-    position: absolute;
-    width: 200px;
-    text-align: center;
-    z-index: 10001;
-    color: #ffffff;
-    font-size: 1.5em;
-    line-height: 1.15em;
-    padding: 10px;
-    border-radius: 3px;
-    right: 70px;
-    top: 10px;
-    text-shadow: 1px 1px black;
+  position: absolute;
+  width: 200px;
+  text-align: center;
+  z-index: 10001;
+  color: #ffffff;
+  font-size: 1.5em;
+  line-height: 1.15em;
+  padding: 10px;
+  border-radius: 3px;
+  right: 70px;
+  top: 10px;
+  text-shadow: 1px 1px black;
 }
 </style>

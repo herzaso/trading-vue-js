@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
 
 // MOB_DEBUG=true npm run test - Enables mobile debugging
@@ -9,10 +9,7 @@ if (MOB_DEBUG) {
     console.warn = debug
 }
 
-new Vue({
-  el: '#app',
-  render: h => h(App)
-})
+createApp(App).mount('#app');
 
 function debug(...argv) {
     fetch('/debug?argv=' + JSON.stringify(argv))

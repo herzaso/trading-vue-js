@@ -94,11 +94,14 @@ Open `App.vue` in your favorite text editor. The code should look like this:
 <template>
 <!-- TradingVueJs 101 (example from 'Getting Started' ) -->
 
-<trading-vue :data="chart" :width="this.width" :height="this.height"
+<trading-vue
+    :data="chart"
+    :width="width"
+    :height="height"
     :color-back="colors.colorBack"
     :color-grid="colors.colorGrid"
-    :color-text="colors.colorText">
-</trading-vue>
+    :color-text="colors.colorText"
+/>
 </template>
 
 <script>
@@ -151,14 +154,16 @@ Add `overlays` property to the trading-vue component, which contains an array (w
 
 ```html
 <template>
-<!-- TradingVueJs 101 (example from 'Getting Started' ) -->
-
-<trading-vue :data="chart" :width="this.width" :height="this.height"
-    :overlays="overlays"
-    :color-back="colors.colorBack"
-    :color-grid="colors.colorGrid"
-    :color-text="colors.colorText">
-</trading-vue>
+    <!-- TradingVueJs 101 (example from 'Getting Started' ) -->
+    <trading-vue
+        :data="chart"
+        :width="width"
+        :height="height"
+        :overlays="overlays"
+        :color-back="colors.colorBack"
+        :color-grid="colors.colorGrid"
+        :color-text="colors.colorText"
+    />
 </template>
 ...
 ```

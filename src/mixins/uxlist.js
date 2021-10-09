@@ -1,7 +1,8 @@
 
-// Manager for Inteerface objects
+// Manager for Interface objects
 
 export default {
+    data() { return { uxs: [] } },
     methods: {
         on_ux_event(d, target) {
             if (d.event === 'new-interface') {
@@ -49,7 +50,7 @@ export default {
         modify(ux, obj = {}) {
             for (var k in obj) {
                 if (k in ux) {
-                    this.$set(ux, k, obj[k])
+                    ux[k] = obj[k];
                 }
             }
         },
@@ -59,5 +60,4 @@ export default {
                 x => x.overlay.id !== id)
         }
     },
-    data() { return { uxs: [] } }
 }

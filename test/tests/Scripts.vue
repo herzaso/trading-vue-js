@@ -1,30 +1,36 @@
 <template>
-<span style="width: 100%">
-    <trading-vue :data="chart"
-            :width="this.width - pane"
-            :height="this.height"
-            :toolbar="true" :overlays="ov"
-            ref="tv" :chart-config="{ DEFAULT_LEN: 300 }"
-            :color-back="colors.colorBack"
-            :color-grid="colors.colorGrid"
-            :color-text="colors.colorText">
-    </trading-vue>
+  <span style="width: 100%">
+    <trading-vue
+      ref="tv"
+      :data="chart"
+      :width="width - pane"
+      :height="height"
+      :toolbar="true"
+      :overlays="ov"
+      :chart-config="{ DEFAULT_LEN: 300 }"
+      :color-back="colors.colorBack"
+      :color-grid="colors.colorGrid"
+      :color-text="colors.colorText"
+    />
 
-    <codepane :colors="{}" :width="pane"
-        :height="height" :src="src"
-        @src-changed="src_changed"/>
-</span>
+    <codepane
+      :colors="{}"
+      :width="pane"
+      :height="height"
+      :src="src"
+      @src-changed="src_changed"
+    />
+  </span>
 </template>
 
 <script>
-import TradingVue from '../../src/TradingVue.vue'
-import Data from '../data/data_scripts.json'
-import DataCube from '../../src/helpers/datacube.js'
-import ScriptOverlay from './Scripts/ScriptOverlay.vue'
-import Codepane from './Scripts/Codepane.vue'
+import TradingVue from "../../src/TradingVue.vue";
+import Data from "../data/data_scripts.json";
+import DataCube from "../../src/helpers/datacube.js";
+import ScriptOverlay from "./Scripts/ScriptOverlay.vue";
+import Codepane from "./Scripts/Codepane.vue";
 
-const DEF_SRC =
-`// === Script calculation object ===
+const DEF_SRC = `// === Script calculation object ===
 // update() function should set this[0]
 // or return the current data point
 // init() called once before updates
@@ -56,62 +62,62 @@ return {
     \`,
     post: \`// After the updates\`
 }
-`
+`;
 
 export default {
-    name: 'Scripts',
-    icon: '',
-    description: 'Supposed to be precisely calculated',
-    early: true,
-    props: ['night'],
-    components: {
-        TradingVue, Codepane
+  name: "Scripts",
+  icon: "",
+  description: "Supposed to be precisely calculated",
+  early: true,
+  components: {
+    TradingVue,
+    Codepane,
+  },
+  props: ["night"],
+  data() {
+    return {
+      chart: new DataCube(JSON.parse(JSON.stringify(Data)), {
+        scripts: true,
+        //script_depth: 300
+      }),
+      width: window.innerWidth,
+      height: window.innerHeight,
+      pane: Math.floor(window.innerWidth * 0.35),
+      ov: [ScriptOverlay],
+      src: DEF_SRC,
+    };
+  },
+  computed: {
+    colors() {
+      return this.$props.night
+        ? {}
+        : {
+            colorBack: "#fff",
+            colorGrid: "#eee",
+            colorText: "#333",
+          };
     },
-    methods: {
-        onResize(event) {
-            this.width = window.innerWidth
-            this.height = window.innerHeight - 50
-        },
-        src_changed(text) {
-            this.src = text
-            ov.methods.calc = new Function('', `${text}\n`)
-        }
+  },
+  mounted() {
+    window.addEventListener("resize", this.onResize);
+    this.onResize();
+    window.dc = this.chart;
+    window.tv = this.$refs.tv;
+    window.ov = this.ov[0];
+    window.test = this;
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
+  },
+  methods: {
+    onResize() {
+      this.width = window.innerWidth;
+      this.height = window.innerHeight - 50;
     },
-    mounted() {
-        window.addEventListener('resize', this.onResize)
-        this.onResize()
-        window.dc = this.chart
-        window.tv = this.$refs.tv
-        window.ov = this.ov[0]
-        window.test = this
+    src_changed(text) {
+      this.src = text;
+      this.ov.methods.calc = new Function("", `${text}\n`);
     },
-    computed: {
-        colors() {
-            return this.$props.night ? {} : {
-                colorBack: '#fff',
-                colorGrid: '#eee',
-                colorText: '#333'
-            }
-        },
-    },
-    beforeDestroy() {
-        window.removeEventListener('resize', this.onResize)
-    },
-    data() {
-        return {
-            chart: new DataCube(JSON.parse(JSON.stringify(Data)), {
-                scripts: true,
-                //script_depth: 300
-            }),
-            width: window.innerWidth,
-            height: window.innerHeight,
-            pane: Math.floor(window.innerWidth * 0.35),
-            ov: [ScriptOverlay],
-            src: DEF_SRC
-        }
-    }
-}
+  },
+};
 </script>
-
-<style>
-</style>

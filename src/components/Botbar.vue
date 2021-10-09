@@ -1,64 +1,79 @@
 <script>
 // The bottom bar (yep, that thing with a bunch of dates)
+import { h } from 'vue'
 
-import Botbar from './js/botbar.js'
-import Canvas from '../mixins/canvas.js'
+import Botbar from "./js/botbar.js";
+import Canvas from "../mixins/canvas.js";
 
 export default {
-    name: 'Botbar',
-    props: [
-        'sub', 'layout', 'range', 'interval', 'cursor', 'colors', 'font',
-        'width', 'height', 'rerender', 'tv_id', 'config', 'shaders',
-        'timezone'
-    ],
-    mixins: [Canvas],
-    mounted() {
-        const el = this.$refs['canvas']
-        this.renderer = new Botbar(el, this)
-        this.setup()
-        this.redraw()
+  name: "Botbar",
+  mixins: [Canvas],
+  props: [
+    "sub",
+    "layout",
+    "range",
+    "interval",
+    "cursor",
+    "colors",
+    "font",
+    "width",
+    "height",
+    "rerender",
+    "tv_id",
+    "config",
+    "shaders",
+    "timezone",
+  ],
+  computed: {
+    bot_shaders() {
+      return this.$props.shaders.filter((x) => x.target === "botbar");
     },
-    render(h) {
-        const sett = this.$props.layout.botbar
-        return this.create_canvas(h, 'botbar', {
-            position: {
-                x: 0,
-                y: sett.offset || 0
-            },
-            attrs: {
-                rerender: this.$props.rerender,
-                width: sett.width,
-                height: sett.height,
-            },
-            style: {
-                backgroundColor: this.$props.colors.back
-            },
-        })
+  },
+  watch: {
+    range: {
+      handler: function () {
+        this.redraw();
+      },
+      deep: true,
     },
-    computed: {
-        bot_shaders() {
-            return this.$props.shaders
-                .filter(x => x.target === 'botbar')
-        }
+    cursor: {
+      handler: function () {
+        this.redraw();
+      },
+      deep: true,
     },
-    watch: {
-        range: {
-            handler: function() { this.redraw() },
-            deep: true
-        },
-        cursor: {
-            handler: function() { this.redraw() },
-            deep: true
-        },
-        rerender() {
-            this.$nextTick(() => this.redraw())
-        }
-    }
-}
-
+    rerender() {
+      this.$nextTick(() => this.redraw());
+    },
+  },
+  mounted() {
+    const el = this.$refs["canvas"];
+    this.renderer = new Botbar(el, this);
+    this.setup();
+    this.redraw();
+  },
+  render() {
+    const sett = this.$props.layout.botbar;
+    return this.create_canvas(h, "botbar", {
+      position: {
+        x: 0,
+        y: sett.offset || 0,
+      },
+      attrs: {
+        rerender: this.$props.rerender,
+        width: sett.width,
+        height: sett.height,
+      },
+      style: {
+        backgroundColor: this.$props.colors.back,
+      },
+    });
+  },
+};
 </script>
+
 <style>
 .trading-vue-botbar {
-    position: relative !important;
+  position: relative !important;
 }
 </style>

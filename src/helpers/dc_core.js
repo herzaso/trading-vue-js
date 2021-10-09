@@ -31,32 +31,31 @@ export default class DCCore extends DCEvents {
     }
 
     // Init Data Structure v1.1
-    init_data($root) {
-
+    init_data() {
         if (!('chart' in this.data)) {
-            this.tv.$set(this.data, 'chart', {
+            this.data.chart = {
                 type: 'Candles',
                 data: this.data.ohlcv || []
-            })
+            }
         }
 
         if (!('onchart' in this.data)) {
-            this.tv.$set(this.data, 'onchart', [])
+            this.data.onchart = [];
         }
 
         if (!('offchart' in this.data)) {
-            this.tv.$set(this.data, 'offchart', [])
+            this.data.offchart = [];
         }
 
         if (!this.data.chart.settings) {
-            this.tv.$set(this.data.chart,'settings', {})
+            this.data.chart.settings = {};
         }
 
         // Remove ohlcv cuz we have Data v1.1^
         delete this.data.ohlcv
 
         if (!('datasets' in this.data)) {
-            this.tv.$set(this.data, 'datasets', [])
+            this.data.datasets = [];
         }
 
         // Init dataset proxies
@@ -69,7 +68,7 @@ export default class DCCore extends DCEvents {
 
     // Range change callback (called by TradingVue)
     // TODO: improve (reliablity + chunk with limited size)
-    async range_changed(range, tf, check=false) {
+    async range_changed(range, tf, check = false) {
 
         if (!this.loader) return
         if (!this.loading) {
@@ -128,7 +127,9 @@ export default class DCCore extends DCEvents {
             let i = count[ov.type]++
             ov.id = `onchart.${ov.type}${i}`
             if (!ov.name) ov.name = ov.type + ` ${i}`
-            if (!ov.settings) this.tv.$set(ov, 'settings', {})
+            if (!ov.settings) {
+                ov.settings = {}
+            }
 
             // grid_id,layer_id => DC id mapping
             this.gldc[`g0_${ov.type}_${i}`] = ov.id
@@ -144,7 +145,9 @@ export default class DCCore extends DCEvents {
             let i = count[ov.type]++
             ov.id = `offchart.${ov.type}${i}`
             if (!ov.name) ov.name = ov.type + ` ${i}`
-            if (!ov.settings) this.tv.$set(ov, 'settings', {})
+            if (!ov.settings) {
+                ov.settings = {};
+            }
 
             // grid_id,layer_id => DC id mapping
             gid++
@@ -336,7 +339,7 @@ export default class DCCore extends DCEvents {
         // TODO: Is there a simpler approach?
         Object.assign(new_obj, obj.v)
         Object.assign(new_obj, data)
-        this.tv.$set(obj.p, obj.i, new_obj)
+        obj.p[obj.i] = new_obj;
 
     }
 
@@ -348,10 +351,10 @@ export default class DCCore extends DCEvents {
         if (!data.length) return obj.v
 
         let r1 = [obj.v[0][0], obj.v[obj.v.length - 1][0]]
-        let r2 = [data[0][0],  data[data.length - 1][0]]
+        let r2 = [data[0][0], data[data.length - 1][0]]
 
         // Overlap
-        let o = [Math.max(r1[0],r2[0]), Math.min(r1[1],r2[1])]
+        let o = [Math.max(r1[0], r2[0]), Math.min(r1[1], r2[1])]
 
         if (o[1] >= o[0]) {
 
@@ -362,7 +365,7 @@ export default class DCCore extends DCEvents {
 
             // Dst === Overlap === Src
             if (!obj.v.length && !data.length) {
-                this.tv.$set(obj.p, obj.i, od)
+                obj.p[obj.i] = od;
                 return obj.v
             }
 
@@ -372,16 +375,10 @@ export default class DCCore extends DCEvents {
             // If dst is totally contained in src
             if (!obj.v.length) { obj.v = data.splice(d2[0]) }
 
-            this.tv.$set(
-                obj.p, obj.i, this.combine(obj.v, od, data)
-            )
+            obj.p[obj.i] = this.combine(obj.v, od, data);
 
         } else {
-
-            this.tv.$set(
-                obj.p, obj.i, this.combine(obj.v, [], data)
-            )
-
+            obj.p[obj.i] = this.combine(obj.v, [], data);
         }
 
         return obj.v
@@ -437,7 +434,7 @@ export default class DCCore extends DCEvents {
 
             return Object.assign(dst, o)
 
-        // The overlap is on the right
+            // The overlap is on the right
         } else if (last(src) > last(dst)) {
 
             // Psh(...) is faster but can overflow the stack
@@ -448,7 +445,7 @@ export default class DCCore extends DCEvents {
                 return dst.concat(o, src)
             }
 
-        // The overlap is on the left
+            // The overlap is on the left
         } else if (src[0][0] < dst[0][0]) {
 
             // Push(...) is faster but can overflow the stack
@@ -459,7 +456,7 @@ export default class DCCore extends DCEvents {
                 return src.concat(o, dst)
             }
 
-        } else {  return []  }
+        } else { return [] }
 
     }
 
@@ -478,7 +475,7 @@ export default class DCCore extends DCEvents {
             }
         } else if (upd_t === last_t) {
             if (main) {
-                this.tv.$set(data, data.length - 1, point)
+                data[data.length - 1] = point;
             } else {
                 data[data.length - 1] = point
             }

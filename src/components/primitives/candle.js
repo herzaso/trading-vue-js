@@ -40,7 +40,7 @@ export default class CandleExt {
             // TODO: Move common calculations to layout.js
             let s = green ? 1 : -1
             this.ctx.fillRect(
-                Math.floor(data.x - hw -1),
+                Math.floor(data.x - hw - 1),
                 data.c,
                 Math.floor(hw * 2 + 1),
                 s * Math.max(h, max_h),
@@ -58,7 +58,7 @@ export default class CandleExt {
             this.ctx.lineTo(
                 x05,
                 Math.floor(Math.max(data.o, data.c)) +
-                    (data.o === data.c ? 1 : 0)
+                (data.o === data.c ? 1 : 0)
             )
 
             this.ctx.stroke()

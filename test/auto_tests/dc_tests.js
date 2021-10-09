@@ -7,13 +7,6 @@ import DataCube from '../../src/helpers/datacube.js'
 // DC.merge() tests
 const dc = new DataCube()
 
-// Simulate
-dc.tv = {
-    $set: function (parent, index, data) {
-        parent[index] = data
-    }
-}
-
 class Dst {
     constructor(arr) {
         this.p = this
