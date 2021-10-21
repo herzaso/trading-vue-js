@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { markRaw } from 'vue';
 import TradingVue from "../../src/TradingVue.vue";
 import Data from "../data/data_scripts.json";
 import DataCube from "../../src/helpers/datacube.js";
@@ -83,7 +84,7 @@ export default {
       width: window.innerWidth,
       height: window.innerHeight,
       pane: Math.floor(window.innerWidth * 0.35),
-      ov: [ScriptOverlay],
+      ov: markRaw([ScriptOverlay]),
       src: DEF_SRC,
     };
   },

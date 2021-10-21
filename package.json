@@ -1,5 +1,5 @@
 {
-  "name": "trading-vue-js",
+  "name": "trading-vue3-js",
   "version": "1.0.2",
   "description": "Hackable charting lib for traders",
   "main": "./dist/trading-vue.js",
@@ -23,7 +23,7 @@
       "test/auto_tests/**/*"
     ]
   },
-  "author": "C451",
+  "author": "herzaso",
   "license": "MIT",
   "files": [
     "dist/*",

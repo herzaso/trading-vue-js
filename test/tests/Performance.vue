@@ -53,14 +53,14 @@ export default {
     window.addEventListener("resize", this.onResize);
     this.onResize();
 
-    var stats = (this.stats = new this.Stats());
+    var stats = (this.stats = new Stats());
     stats.showPanel(1); // 0: fps, 1: ms, 2: mb, 3+: custom
     document.body.appendChild(stats.dom);
     stats.domElement.style.right = "65px";
     stats.domElement.style.top = "55px";
     stats.domElement.style.left = null;
 
-    let grid = this.search(this, "<Grid>");
+    const grid = this.$refs.tvjs.$refs.chart.$refs.sec.$refs.grid;
     this.grid = grid;
     // Inject stats.js
 
@@ -84,17 +84,6 @@ export default {
     onResize() {
       this.width = window.innerWidth;
       this.height = window.innerHeight - 50;
-    },
-    search(comp, name) {
-      if (comp._name === name) {
-        return comp;
-      } else {
-        for (var c of comp.$children) {
-          let res = this.search(c, name);
-          if (res) return res;
-        }
-      }
-      return null;
     },
     scrolling_test(start = true) {
       if (start) {
