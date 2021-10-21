@@ -232,7 +232,7 @@ export default {
       }
       return comp_list.map((x, i) =>
         h(x.cls, {
-          ref: `${x.type}_${count[x.type]++}`,
+          ref: `${x.type}_${count[x.type]}`,
           id: `${x.type}_${count[x.type]++}`,
           type: x.type,
           data: x.data,
