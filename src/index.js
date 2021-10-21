@@ -14,29 +14,28 @@ import Ray from './components/primitives/ray.js'
 import Seg from './components/primitives/seg.js'
 
 import { layout_cnv, layout_vol } from
-    './components/js/layout_cnv.js'
+  './components/js/layout_cnv.js'
 
 const primitives = {
-    Candle, Volbar, Line, Pin, Price, Ray, Seg
+  Candle, Volbar, Line, Pin, Price, Ray, Seg
 }
 
-TradingVue.install = function (Vue) {
-    Vue.component(TradingVue.name, TradingVue)
+TradingVue.install = function (app) {
+  app.component(TradingVue.name, TradingVue)
 }
 
-if (typeof window !== 'undefined' && window.Vue) {
-    window.Vue.use(TradingVue)
-    window.TradingVueLib = {
-        TradingVue, Overlay, Utils, Constants,
-        Candle, Volbar, layout_cnv, layout_vol,
-        DataCube, Tool, Interface, primitives
-    }
+if (typeof window !== 'undefined') {
+  window.TradingVueLib = {
+    TradingVue, Overlay, Utils, Constants,
+    Candle, Volbar, layout_cnv, layout_vol,
+    DataCube, Tool, Interface, primitives
+  }
 }
 
 export default TradingVue
 
 export {
-    TradingVue, Overlay, Utils, Constants,
-    Candle, Volbar, layout_cnv, layout_vol,
-    DataCube, Tool, Interface, primitives
+  TradingVue, Overlay, Utils, Constants,
+  Candle, Volbar, layout_cnv, layout_vol,
+  DataCube, Tool, Interface, primitives,
 }

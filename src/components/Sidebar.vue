@@ -25,6 +25,7 @@ export default {
     "config",
     "shaders",
   ],
+  emits: ["sidebar-transform"],
   watch: {
     range: {
       handler: function () {

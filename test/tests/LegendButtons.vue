@@ -72,7 +72,6 @@ export default {
           d.settings.display = !d.settings.display;
         }
       }
-      console.log(event);
     },
   },
 };

@@ -17,10 +17,8 @@ import Dragg from "./dragg.js";
 export default {
   name: "Window",
   mixins: [Dragg],
-  props: [
-    "title",
-    "tv"
-  ],
+  props: ["title", "tv"],
+  emits: ["new-interface", "close"],
   data() {
     return {
       ww: 0,

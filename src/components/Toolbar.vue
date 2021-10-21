@@ -24,6 +24,7 @@ export default {
   name: "Toolbar",
   components: { ToolbarItem },
   props: ["data", "height", "colors", "tv_id", "config"],
+  emits: ["custom-event"],
   data() {
     return { tool_count: 0, sub_map: {} };
   },
@@ -76,7 +77,6 @@ export default {
       deep: true,
     },
   },
-  mounted() {},
   methods: {
     selected(tool) {
       this.$emit("custom-event", {

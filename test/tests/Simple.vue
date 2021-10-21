@@ -39,10 +39,10 @@ export default {
       return this.$props.night
         ? {}
         : {
-            colorBack: "#fff",
-            colorGrid: "#eee",
-            colorText: "#333",
-          };
+          colorBack: "#fff",
+          colorGrid: "#eee",
+          colorText: "#333",
+        };
     },
   },
   mounted() {

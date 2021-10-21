@@ -21,6 +21,7 @@ export default {
   name: "UxLayer",
   components: { UxWrapper },
   props: ["tv_id", "id", "uxs", "updater", "colors", "config"],
+  emits: ["custom-event"],
   computed: {
     style() {
       return {

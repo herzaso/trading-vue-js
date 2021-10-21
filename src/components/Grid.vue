@@ -44,6 +44,17 @@ export default {
     "meta",
     "shaders",
   ],
+  emits: [
+    "cursor-changed",
+    "cursor-locked",
+    "layer-meta-props",
+    "custom-event",
+    "register-kb-listener",
+    "remove-kb-listener",
+    "rezoom-range",
+    "sidebar-transform",
+    "range-changed",
+  ],
   data() {
     return {
       layer_events: {
@@ -108,21 +119,21 @@ export default {
     overlays: {
       // Track changes in calc() functions
       handler: function (ovs) {
-        for (var ov of ovs) {
-          for (var comp of this.$children) {
-            if (typeof comp.id !== "string") continue;
-            let tuple = comp.id.split("_");
-            tuple.pop();
-            if (tuple.join("_") === ov.name) {
-              comp.calc = ov.methods.calc;
-              if (!comp.calc) continue;
-              let calc = comp.calc.toString();
+        for (var comp of Object.values(this.$refs)) {
+          if (typeof comp.id !== "string") continue;
+          let tuple = comp.id.split("_");
+          tuple.pop();
+          const name = tuple.join("_");
+
+          ovs.forEach((ov) => {
+            if (ov.name === name && ov.methods.calc) {
+              let calc = ov.methods.calc.toString();
               if (calc !== ov.__prevscript__) {
                 comp.exec_script();
               }
               ov.__prevscript__ = calc;
             }
-          }
+          });
         }
       },
       deep: true,
@@ -179,6 +190,7 @@ export default {
   },
   methods: {
     new_layer(layer) {
+      console.log('********************** new layer', layer);
       this.$nextTick(() => this.renderer.new_layer(layer));
     },
     del_layer(layer) {
@@ -221,6 +233,7 @@ export default {
       }
       return comp_list.map((x, i) =>
         h(x.cls, {
+          ref: `${x.type}_${count[x.type]++}`,
           id: `${x.type}_${count[x.type]++}`,
           type: x.type,
           data: x.data,
@@ -271,6 +284,7 @@ export default {
   render() {
     const id = this.$props.grid_id;
     const layout = this.$props.layout.grids[id];
+
     return this.create_canvas(h, `grid-${id}`, {
       position: {
         x: 0,

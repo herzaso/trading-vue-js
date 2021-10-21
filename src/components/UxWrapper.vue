@@ -41,6 +41,7 @@ import Utils from "../stuff/utils.js";
 export default {
   name: "UxWrapper",
   props: ["ux", "updater", "colors", "config"],
+  emits: ["custom-event"],
   data() {
     return {
       x: 0,

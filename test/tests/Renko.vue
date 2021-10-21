@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { markRaw } from 'vue';
 import TradingVue from "../../src/TradingVue.vue";
 import Data from "../data/data_renko.json";
 import DataCube from "../../src/helpers/datacube.js";
@@ -33,7 +34,7 @@ export default {
       chart: new DataCube(Data),
       width: window.innerWidth,
       height: window.innerHeight,
-      overlays: [Eye],
+      overlays: markRaw([Eye]),
     };
   },
   computed: {

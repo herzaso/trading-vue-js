@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { markRaw } from 'vue';
 import TradingVue from "../../src/TradingVue.vue";
 import DataCube from "../../src/helpers/datacube.js";
 import Data from "../data/data_ux.json";
@@ -32,7 +33,7 @@ export default {
       chart: new DataCube(Data), // Data will be here,
       width: window.innerWidth,
       height: window.innerHeight,
-      overlays: [SplineUx],
+      overlays: markRaw([SplineUx]),
     };
   },
   computed: {

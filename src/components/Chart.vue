@@ -59,6 +59,7 @@ export default {
     "skin",
     "timezone",
   ],
+  emits: ["range-changed", "custom-event", "legend-button-click"],
   data() {
     return {
       // Current data slice

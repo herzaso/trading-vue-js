@@ -17,6 +17,7 @@
 export default {
   name: "TfSelector",
   props: ["charts"],
+  emits: ["selected"],
   data() {
     return {
       selected: 0,

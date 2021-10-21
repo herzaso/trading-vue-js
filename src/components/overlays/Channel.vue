@@ -87,7 +87,6 @@ export default {
       }
       ctx.stroke();
     },
-
     mapp(p) {
       const layout = this.$props.layout;
       return (

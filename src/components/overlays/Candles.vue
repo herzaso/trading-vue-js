@@ -11,6 +11,7 @@ import Price from "../primitives/price.js";
 export default {
   name: "Candles",
   mixins: [Overlay],
+  emits: ['new-shader'],
   data() {
     return { price: {} };
   },

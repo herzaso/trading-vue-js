@@ -1,30 +1,31 @@
 <script>
-
 // Calculation of the main chart & other indicators for
 // Datasets.vue example
 
-import Overlay from '../../../src/mixins/overlay.js'
+import Overlay from "../../../src/mixins/overlay.js";
 
 export default {
-    name: 'DatasetCalc',
-    mixins: [Overlay],
-    methods: {
-        meta_info() {
-            return { author: 'C451', version: '1.0.0' }
+  name: "DatasetCalc",
+  mixins: [Overlay],
+  methods: {
+    meta_info() {
+      return { author: "C451", version: "1.0.0" };
+    },
+    use_for() {
+      return ["DatasetCalc"];
+    },
+    draw() {}, // No rendering
+    calc() {
+      return {
+        props: {
+          k: { def: 10, text: "Sampling window X TF" },
+          ds: { def: "1m", text: "Select dataset" },
         },
-        use_for() { return ['DatasetCalc'] },
-        draw() {}, // No rendering
-        calc() {
-            return {
-                props: {
-                    k: { def: 10, text: 'Sampling window X TF' },
-                    ds: { def: '1m', text: 'Select dataset' }
-                },
-                data: {
-                    trades: { type: 'Trades' },
-                    src1m: { type: 'Data1m' }
-                },
-                init: `
+        data: {
+          trades: { type: "Trades" },
+          src1m: { type: "Data1m" },
+        },
+        init: `
                     console.log('init script')
                     if (ds === '1m') {
                         sym(src1m, { main:true, window: tf * k })
@@ -32,7 +33,7 @@ export default {
                         sym(trades, { main:true, window: tf * k })
                     }
                 `,
-                update: `
+        update: `
                     //offchart(rsi(close, 14), 'RSI', {type: 'RSI'})
                     //let [m, h, l] = bb(close, 20, 2)
                     //onchart([h[0], m[0], l[0]], 'BB', {type:'BB'})
@@ -46,11 +47,11 @@ export default {
                     offchart(vol1D[0])
                     offchart(sym('1D').vol[0], 'V')
                 `,
-                post: `
+        post: `
                     console.log(se)
-                `
-            }
-        }
-    }
-}
+                `,
+      };
+    },
+  },
+};
 </script>

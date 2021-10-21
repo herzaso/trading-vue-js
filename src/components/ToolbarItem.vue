@@ -40,6 +40,7 @@ export default {
   name: "ToolbarItem",
   components: { ItemList },
   props: ["data", "selected", "colors", "tv_id", "config", "dc", "subs"],
+  emits: ["item-selected"],
   data() {
     return {
       exp_hover: false,

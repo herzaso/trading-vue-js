@@ -25,6 +25,7 @@ export default {
     LegendButton,
   },
   props: ["buttons", "tv_id", "ov_id", "grid_id", "index", "display", "config"],
+  emits: ["legend-button-click"],
   methods: {
     button_click(event) {
       this.$emit("legend-button-click", event);

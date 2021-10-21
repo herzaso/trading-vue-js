@@ -5,6 +5,7 @@
 <script>
 export default {
   name: "KeyboardListener",
+  emits: ["register-kb-listener", "remove-kb-listener", "keydown", "keyup", "keypress"],
   created: function () {
     this.$emit("register-kb-listener", {
       id: this._uid,

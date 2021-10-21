@@ -27,7 +27,7 @@
         {{ (common.meta.last || [])[4] }}
       </span>
     </div>
-    <div v-for="ind in this.indicators" :key="ind.name" class="t-vue-ind">
+    <div v-for="ind in indicators" :key="ind.name" class="t-vue-ind">
       <span class="t-vue-iname">{{ ind.name }}</span>
       <button-group
         :buttons="common.buttons"
@@ -64,6 +64,7 @@ export default {
   name: "ChartLegend",
   components: { ButtonGroup, Spinner },
   props: ["common", "values", "grid_id", "meta_props"],
+  emits: ["legend-button-click"],
   computed: {
     ohlcv() {
       if (!this.$props.values || !this.$props.values.ohlcv) {

@@ -13,6 +13,12 @@ import Ray from "../primitives/ray.js";
 export default {
   name: "LineTool",
   mixins: [Overlay, Tool],
+  emits: [
+    "drawing-mode-off",
+    "scroll-lock",
+    "change-settings",
+    "object-selected",
+  ],
   computed: {
     sett() {
       return this.$props.settings;
@@ -68,11 +74,12 @@ export default {
           state: "tracking",
         })
       );
+      // OFIR TODO: on?????
       this.pins[1].on("settled", () => {
         // Call when current tool drawing is finished
         // (Optionally) reset the mode back to 'Cursor'
         this.set_state("finished");
-        this.$emit("drawing-mode-off");
+        this.custom_event("drawing-mode-off");
       });
     },
     draw(ctx) {

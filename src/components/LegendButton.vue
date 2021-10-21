@@ -26,6 +26,7 @@ export default {
     "icon",
     "config",
   ],
+  emits: ["legend-button-click"],
   computed: {
     base64() {
       return this.icon || Icons[this.file_name];

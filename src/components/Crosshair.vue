@@ -4,6 +4,7 @@ import Crosshair from "./js/crosshair.js";
 export default {
   name: "Crosshair",
   props: ["cursor", "colors", "layout", "sub"],
+  emits: ["redraw-grid", "new-grid-layer"],
   watch: {
     cursor: {
       handler: function () {

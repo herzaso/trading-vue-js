@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { markRaw } from 'vue';
 import TradingVue from "../../src/TradingVue.vue";
 import Utils from "../../src/stuff/utils.js";
 import Const from "../../src/stuff/constants.js";
@@ -49,7 +50,7 @@ export default {
       width: window.innerWidth,
       height: window.innerHeight,
       index_based: false,
-      overlays: [ScriptOverlay, BSB],
+      overlays: markRaw([ScriptOverlay, BSB]),
     };
   },
   computed: {

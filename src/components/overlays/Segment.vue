@@ -59,6 +59,5 @@ export default {
       return [this.color];
     },
   },
-  // Define internal setting & constants here
 };
 </script>

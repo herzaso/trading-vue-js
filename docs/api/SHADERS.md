@@ -4,21 +4,21 @@
 
 ```js
 class Shader {
-    constructor(target, draw, name) {
-        this.target = target // Where to apply ('sidebar|botbar')
-        this.draw = draw  // arrow function ctx => {}
-        this.name = name // optional
-        this.id = null // Generated automatically
-    }
+  constructor(target, draw, name) {
+    this.target = target // Where to apply ('sidebar|botbar')
+    this.draw = draw  // arrow function ctx => {}
+    this.name = name // optional
+    this.id = null // Generated automatically
+  }
 }
 
-// In you overlay:
+// In your overlay:
 this.$emit('new-shader', new Shader('sidebar', ctx => {...}))
 
 // Or simply
 this.$emit('new-shader', {
-    target: 'sidebar',
-    draw: ctx => {...}
+  target: 'sidebar',
+  draw: ctx => {...}
 })
 ```
 

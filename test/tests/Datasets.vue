@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import { markRaw } from 'vue';
 import TradingVue from "../../src/TradingVue.vue";
 import TfSelector from "./Timeframes/TFSelector.vue";
 import Data from "../data/data_skybtc_trades.json";
@@ -97,7 +98,7 @@ export default {
       ),
       width: window.innerWidth,
       height: window.innerHeight,
-      overlays: [DatasetCalc],
+      overlays: markRaw([DatasetCalc]),
       extensions: [Alps],
       wk: 1,
       tfs: { "5m": {}, "15m": {}, "1H": {} },

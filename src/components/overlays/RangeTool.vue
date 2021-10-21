@@ -10,6 +10,12 @@ import Seg from "../primitives/seg.js";
 export default {
   name: "RangeTool",
   mixins: [Overlay, Tool],
+  emits: [
+    "drawing-mode-off",
+    "scroll-lock",
+    "change-settings",
+    "object-selected",
+  ],
   computed: {
     sett() {
       return this.$props.settings;
@@ -102,14 +108,15 @@ export default {
           hidden: this.shift,
         })
       );
+      // OFIR TODO: on????? what's pin[1]?
       this.pins[1].on("settled", () => {
         // Call when current tool drawing is finished
         // (Optionally) reset the mode back to 'Cursor'
         this.set_state("finished");
-        this.$emit("drawing-mode-off");
+        this.custom_event("drawing-mode-off");
         // Deselect the tool in shiftMode
         if (this.shift)
-          this._$emit("custom-event", {
+          this.$emit("custom-event", {
             event: "object-selected",
             args: [],
           });
