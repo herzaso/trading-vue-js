@@ -36,7 +36,6 @@ export default class Grid {
   }
 
   emit(...props) {
-    console.log('%%%%%%%%%%%%', ...props, this.comp)
     this.comp.$emit(...props);
   }
 

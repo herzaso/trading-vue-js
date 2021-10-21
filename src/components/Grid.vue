@@ -190,7 +190,6 @@ export default {
   },
   methods: {
     new_layer(layer) {
-      console.log('********************** new layer', layer);
       this.$nextTick(() => this.renderer.new_layer(layer));
     },
     del_layer(layer) {
