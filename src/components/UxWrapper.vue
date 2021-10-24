@@ -17,9 +17,8 @@
     class="trading-vue-ux-wrapper"
     :style="style"
   >
-    <!-- >>>>>>>>>>>>> was ux.component (without name) -->
     <component
-      :is="ux.component.name"
+      :is="ux.component"
       :ux="ux"
       :updater="updater"
       :wrapper="wrapper"

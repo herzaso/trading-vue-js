@@ -185,7 +185,7 @@ export default class DCCore extends DCEvents {
     let last = ohlcv[ohlcv.length - 1]
     let tick = data['price']
     let volume = data['volume'] || 0
-    let tf = this.tv.$refs.chart.interval_ms
+    let tf = this.tv.$refs.chart ? this.tv.$refs.chart.interval_ms : 0;
     if (!tf) {
       return console.warn('Define the main timeframe')
     }

@@ -66,7 +66,7 @@ export default {
         },
         onRedrawGrid: this.redraw,
         onLayerMetaProps: (d) => this.$emit("layer-meta-props", d),
-        onCustomEvent: (d) => this.$emit("custom-event", d),
+        onCustomEvent: (d) => this.emit_custom_event(d),
       },
       keyboard_events: {
         onRegisterKbListener: (event) => {
@@ -189,6 +189,10 @@ export default {
     this.$nextTick(() => this.redraw());
   },
   methods: {
+    emit_custom_event(e) {
+      this.on_ux_event(e, 'grid');
+      this.$emit('custom-event', e);
+    },
     new_layer(layer) {
       this.$nextTick(() => this.renderer.new_layer(layer));
     },
@@ -288,9 +292,6 @@ export default {
       position: {
         x: 0,
         y: layout.offset || 0,
-      },
-      on: {
-        onCustomEvent: this.emit_ux_event,
       },
       attrs: {
         width: layout.width,

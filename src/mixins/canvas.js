@@ -49,7 +49,6 @@ export default {
             top: props.position.y + 'px',
             position: 'absolute',
           },
-          ...props.on,
         },
         [
           h('canvas', {

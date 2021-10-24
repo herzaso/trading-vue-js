@@ -1,6 +1,7 @@
 <script>
 // Spline + several test interfaces
 // Adds all necessary stuff for you.
+import { markRaw } from 'vue';
 import Overlay from "../../../src/mixins/overlay.js";
 import Ux1 from "./Ux1.vue";
 
@@ -34,10 +35,9 @@ export default {
     },
     init() {
       // TODO: For some reason need to rebuild to see the changes here
-
       this.custom_event("new-interface", {
         target: "grid",
-        component: Ux1,
+        component: markRaw(Ux1),
         pin: [1585605600000, 6636], // Values can be: '100px', '50%', 'mouse', 'cursor'
         pin_position: "50%, 100% + 20px",
         show_pin: true,
@@ -54,7 +54,7 @@ export default {
 
       this.custom_event("new-interface", {
         target: "grid",
-        component: Ux1,
+        component: markRaw(Ux1),
         pin: [1585936800000, 6700],
         pin_position: "50%,100% + 20px",
         show_pin: true,
@@ -67,7 +67,7 @@ export default {
 
       this.custom_event("new-interface", {
         target: "grid",
-        component: Ux1,
+        component: markRaw(Ux1),
         pin: [1585936800000 - 3600000 * 50, 6600],
         pin_position: "-20px,-20px",
         show_pin: true,
