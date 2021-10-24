@@ -4,7 +4,7 @@
     <keyboard ref="keyboard" />
     <grid-section
       v-for="(grid, i) in _layout.grids"
-      :key="grid.id"
+      :key="i"
       ref="sec"
       :common="section_props(i)"
       :grid_id="i"

@@ -12,14 +12,14 @@
       :color-text="colors.colorText"
     />
     <span class="log-scale">
-      <input type="checkbox" v-model="log_scale" />
+      <input type="checkbox" v-model="log_scale">
       <label>Log Scale</label>
     </span>
     <span class="gc-mode" style="top: 80px; right: 80px">
-      <input type="checkbox" v-model="index_based" />
+      <input type="checkbox" v-model="index_based">
       <label>Index Based</label>
     </span>
-    <tf-selector :charts="charts" v-on:selected="on_selected"> </tf-selector>
+    <tf-selector :charts="charts" @selected="on_selected" />
   </div>
 </template>
 
