@@ -1,4 +1,5 @@
 <script>
+import { markRaw } from 'vue';
 import Overlay from "../../../src/mixins/overlay.js";
 import Ux from "./Ux.vue";
 
@@ -13,12 +14,11 @@ export default {
     init() {
       this.custom_event("new-interface", {
         target: "grid",
-        component: Ux,
+        component: markRaw(Ux),
         pin: ["50px", "70px"],
         pin_position: "0,0",
       });
     },
-    draw(ctx) {},
     use_for() {
       return ["PerfTestUx"];
     },

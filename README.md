@@ -27,6 +27,16 @@ If you create trading software - this lib is probably for you. If you like to ma
 
 <br>
 
+
+## Still not working:
+* switching to dark mode doesn't update immediately
+* changing `log scale` in Timeframes doesn't update immediatly (screen is redrawn only after something else changes)
+* DataHelper (#7) doesn't work - failed to execute postMessage on Worker
+* IndexedBased (#11) doesn't work - something in TradingVue.decubed
+* Performance (#12) - performance test doesn't run
+* Scripts (#14) - doesn't work
+* Extenions (#15) - doesn't work - Cannot convert object to primitive value
+* Datasets (#16) doesn't work - failed to execute postMessage on Worker
 ## Features
 
 * Scrolling & zooming as we all like
